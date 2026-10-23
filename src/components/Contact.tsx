@@ -6,7 +6,7 @@ import { Arrow, Check, SOCIAL_ICONS } from './Icons'
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
 const field =
-  'w-full rounded-xl border border-white/10 bg-ink px-4 py-3.5 text-white placeholder:text-zinc-500 transition focus:border-gold focus:ring-2 focus:ring-gold/30 focus:outline-none'
+  'w-full rounded-xl border border-line bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-muted/70 transition focus:border-ink focus:ring-1 focus:ring-ink focus:outline-none'
 
 function maskPhone(v: string) {
   const d = v.replace(/\D/g, '').slice(0, 11)
@@ -46,15 +46,14 @@ export default function Contact() {
   }
 
   return (
-    <section id="contato" className="relative isolate overflow-hidden py-20 sm:py-28">
-      <div className="absolute top-1/2 left-0 -z-10 h-96 w-96 -translate-y-1/2 rounded-full bg-gold/10 blur-[120px]" />
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
+    <section id="contato" className="py-20 sm:py-28">
+      <div className="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="reveal">
-          <p className="text-sm font-semibold tracking-widest text-gold uppercase">Contato</p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-5xl">
-            Vamos potencializar o retorno do seu <span className="text-gold">patrimônio</span>
+          <p className="text-xs font-medium tracking-[0.3em] text-muted uppercase">Contato</p>
+          <h2 className="mt-4 text-3xl font-light tracking-tight text-ink sm:text-4xl">
+            Vamos potencializar o retorno do seu <span className="font-semibold">patrimônio</span>
           </h2>
-          <p className="mt-5 max-w-lg text-zinc-400">
+          <p className="mt-5 max-w-lg text-muted">
             Busca orientação especializada? Preencha o formulário e eu entro em contato. Se preferir, chame direto no
             WhatsApp.
           </p>
@@ -63,7 +62,7 @@ export default function Contact() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-7 py-4 font-semibold text-black transition hover:scale-[1.03]"
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-sm font-medium text-white transition hover:bg-body"
           >
             <SOCIAL_ICONS.WhatsApp className="h-5 w-5" /> Chamar no WhatsApp
           </a>
@@ -77,14 +76,14 @@ export default function Contact() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-4 rounded-xl border border-white/10 bg-panel px-4 py-3 transition hover:border-gold/50"
+                    className="group flex items-center gap-4 rounded-xl border border-line px-4 py-3 transition hover:border-ink"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/15 text-gold transition group-hover:bg-gold group-hover:text-black">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-soft text-ink transition group-hover:bg-ink group-hover:text-white">
                       <Icon className="h-4 w-4" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-sm font-semibold text-white">{s.name}</span>
-                      <span className="block truncate text-xs text-zinc-400">{s.handle}</span>
+                      <span className="block text-sm font-medium text-ink">{s.name}</span>
+                      <span className="block truncate text-xs text-muted">{s.handle}</span>
                     </span>
                   </a>
                 </li>
@@ -93,30 +92,30 @@ export default function Contact() {
           </ul>
         </div>
 
-        <div className="reveal rounded-3xl border border-gold/20 bg-panel p-6 shadow-2xl shadow-black/50 sm:p-9">
+        <div className="reveal rounded-2xl border border-line bg-soft p-6 sm:p-9">
           {status === 'success' ? (
             <div className="flex h-full min-h-96 flex-col items-center justify-center text-center" role="status">
-              <span className="bg-gold-gradient flex h-16 w-16 items-center justify-center rounded-full text-black">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-white">
                 <Check className="h-8 w-8" />
               </span>
-              <h3 className="mt-6 font-display text-2xl font-bold text-white">Mensagem enviada!</h3>
-              <p className="mt-2 max-w-xs text-zinc-400">Obrigado pelo contato. Retornarei o mais breve possível.</p>
-              <button onClick={() => setStatus('idle')} className="mt-6 font-semibold text-gold hover:underline">
+              <h3 className="mt-6 text-xl font-semibold text-ink">Mensagem enviada!</h3>
+              <p className="mt-2 max-w-xs text-sm text-muted">Obrigado pelo contato. Retornarei o mais breve possível.</p>
+              <button onClick={() => setStatus('idle')} className="mt-6 text-sm font-medium text-ink hover:underline">
                 Enviar outra mensagem
               </button>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-5" noValidate={false}>
-              <h3 className="font-display text-2xl font-bold text-white">Envie sua mensagem</h3>
+              <h3 className="text-xl font-semibold text-ink">Envie sua mensagem</h3>
 
               <div>
-                <label htmlFor="nome" className="mb-1.5 block text-sm font-medium text-zinc-300">Nome</label>
+                <label htmlFor="nome" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Nome</label>
                 <input id="nome" name="nome" required minLength={2} autoComplete="name" placeholder="Seu nome completo" className={field} />
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="telefone" className="mb-1.5 block text-sm font-medium text-zinc-300">WhatsApp</label>
+                  <label htmlFor="telefone" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">WhatsApp</label>
                   <input
                     id="telefone"
                     name="telefone"
@@ -132,13 +131,13 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-zinc-300">E-mail</label>
+                  <label htmlFor="email" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">E-mail</label>
                   <input id="email" name="email" type="email" required autoComplete="email" placeholder="voce@email.com" className={field} />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="interesse" className="mb-1.5 block text-sm font-medium text-zinc-300">Tenho interesse em</label>
+                <label htmlFor="interesse" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Tenho interesse em</label>
                 <select id="interesse" name="interesse" required defaultValue="" className={field}>
                   <option value="" disabled>Selecione uma opção</option>
                   {INTERESTS.map((i) => (
@@ -148,7 +147,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="mensagem" className="mb-1.5 block text-sm font-medium text-zinc-300">Mensagem</label>
+                <label htmlFor="mensagem" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Mensagem</label>
                 <textarea id="mensagem" name="mensagem" rows={4} required minLength={10} placeholder="Conte um pouco sobre o que você procura..." className={`${field} resize-y`} />
               </div>
 
@@ -156,7 +155,7 @@ export default function Contact() {
               <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
 
               {status === 'error' && (
-                <p role="alert" className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                <p role="alert" className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
                   {error} Você pode falar direto pelo WhatsApp.
                 </p>
               )}
@@ -164,11 +163,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="bg-gold-gradient group flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold text-black transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-medium text-white transition hover:bg-body disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === 'sending' ? 'Enviando...' : (<>Enviar mensagem <Arrow className="h-5 w-5 transition group-hover:translate-x-1" /></>)}
               </button>
-              <p className="text-center text-xs text-zinc-500">Seus dados são usados apenas para retornar o seu contato.</p>
+              <p className="text-center text-xs text-muted">Seus dados são usados apenas para retornar o seu contato.</p>
             </form>
           )}
         </div>

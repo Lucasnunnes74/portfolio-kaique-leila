@@ -1,50 +1,26 @@
 @import 'tailwindcss';
 
+/* Paleta neutra — ajuste os hex aqui */
 @theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
-  --color-ink: #0a0a0a;
-  --color-coal: #121212;
-  --color-panel: #1a1a1a;
-  --color-gold: #d4af37;
-  --color-gold-light: #f1d77a;
-  --color-gold-dark: #a8832a;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-shine: shine 3s linear infinite;
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @keyframes shine {
-    to { background-position: 200% center; }
-  }
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --color-paper: #ffffff; /* fundo principal */
+  --color-soft: #f5f5f4; /* seções alternadas */
+  --color-line: #e5e5e3; /* bordas */
+  --color-ink: #0a0a0a; /* texto principal / botões / rodapé */
+  --color-body: #404040; /* texto corrido */
+  --color-muted: #737373; /* texto secundário */
 }
 
 @layer base {
   html { scroll-behavior: smooth; }
-  body {
-    @apply bg-ink font-sans text-zinc-300 antialiased;
-  }
-  section[id] { scroll-margin-top: 5rem; }
-  ::selection { background: var(--color-gold); color: #000; }
-}
-
-@utility text-gold-gradient {
-  background-image: linear-gradient(90deg, #a8832a, #f1d77a, #d4af37, #f1d77a, #a8832a);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-@utility bg-gold-gradient {
-  background-image: linear-gradient(135deg, #f1d77a 0%, #d4af37 50%, #a8832a 100%);
+  body { @apply bg-paper font-sans font-normal text-body antialiased; }
+  section[id] { scroll-margin-top: 4rem; }
+  ::selection { background: var(--color-ink); color: #fff; }
 }
 
 @utility reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(16px);
   transition: opacity 0.7s ease, transform 0.7s ease;
   &.is-visible { opacity: 1; transform: none; }
 }
@@ -52,5 +28,4 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  * { animation: none !important; }
 }
