@@ -37,7 +37,7 @@ export default function Gallery() {
   return (
     <section id="galeria" className="section">
       <div className="container-page">
-        <h2 className="section-title">Galeria</h2>
+        <h2 className="section-title">Serviços</h2>
         <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:mt-0">
           {GALLERY.map((g, i) => (
             <li key={i} className={i === 0 || (i === n - 1 && n % 2 === 0) ? 'col-span-2' : ''}>

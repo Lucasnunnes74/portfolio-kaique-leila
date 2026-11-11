@@ -115,7 +115,7 @@
 /* Abertura + entrada do hero (inspirado no press kit da Rikaya) */
 .intro-splash {
   position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
-  background: #fff; animation: splash-out .8s cubic-bezier(.76,0,.24,1) 1.05s forwards;
+  background: #fff; animation: splash-out .7s cubic-bezier(.76,0,.24,1) .85s forwards;
 }
 .intro-splash-inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .intro-splash-name {
@@ -132,12 +132,13 @@
 }
 @keyframes splash-name { from { opacity: 0; letter-spacing: .7em; filter: blur(4px); } to { opacity: 1; letter-spacing: .3em; filter: none; } }
 @keyframes splash-line { to { transform: scaleX(1); } }
+@keyframes splash-fade { to { opacity: 0; visibility: hidden; } }
 @keyframes splash-out { to { transform: translateY(-100%); } }
 @keyframes pkh-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pkh-photo { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
 @keyframes intro-up { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
-.intro-photo { animation: pkh-photo 1.4s cubic-bezier(.16,1,.3,1) .95s both; }
-.intro-up { animation: intro-up .9s cubic-bezier(.16,1,.3,1) calc(1.05s + var(--i, 0) * .12s) both; }
+.intro-photo { animation: pkh-photo 1.3s cubic-bezier(.16,1,.3,1) .75s both; }
+.intro-up { animation: intro-up .9s cubic-bezier(.16,1,.3,1) calc(.85s + var(--i, 0) * .12s) both; }
 
 /* Barra de progresso de rolagem */
 #scroll-progress {
@@ -147,7 +148,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .intro-photo, .intro-up { animation: none; }
+  /* movimento reduzido: a abertura continua, mas só com fade (sem deslocamento, zoom ou desfoque) */
+  .intro-splash { animation: splash-fade .5s ease .85s forwards; }
+  .intro-splash-name { animation: pkh-fade .8s ease both; letter-spacing: .3em; }
+  .intro-splash-line { animation: none; transform: none; }
+  .intro-photo { animation: pkh-fade 1s ease .75s both; }
+  .intro-up { animation: pkh-fade .8s ease calc(.85s + var(--i, 0) * .1s) both; }
   #scroll-progress { display: none; }
 }
 
