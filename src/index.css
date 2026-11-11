@@ -9,23 +9,122 @@
   --color-ink: #0a0a0a; /* texto principal / botões / rodapé */
   --color-body: #404040; /* texto corrido */
   --color-muted: #737373; /* texto secundário */
+  --color-tech: #3b6ff5; /* acento tecnológico */
+  --color-tint: #f3f6fb; /* fundo azulado bem sutil */
 }
 
 @layer base {
   html { scroll-behavior: smooth; }
   body { @apply bg-paper font-sans font-normal text-body antialiased; }
-  section[id] { scroll-margin-top: 4rem; }
+  section[id] { scroll-margin-top: 5rem; }
+  main { counter-reset: sec; position: relative; }
+  /* Fundo de grade sutil */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgb(59 111 245 / .045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(59 111 245 / .045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 75%);
+  }
+  /* Seções alternadas: tinta azulada bem disfarçada + linha de separação */
+  main > section { position: relative; }
+  main > section:nth-of-type(even) { background: linear-gradient(180deg, var(--color-tint), rgb(243 246 251 / .55)); }
+  main > section:nth-of-type(odd) { background: rgb(255 255 255 / .6); }
+  main > section + section { border-top: 1px solid rgb(59 111 245 / .12); }
+  main > section + section::before {
+    content: ''; position: absolute; top: -1px; left: 50%; width: 5rem; height: 2px; transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--color-tech), transparent);
+  }
   ::selection { background: var(--color-ink); color: #fff; }
+}
+
+@layer components {
+  /* Coluna central estreita (estilo press kit) */
+  .container-page { margin-inline: auto; width: 100%; max-width: 48rem; padding-inline: 1.25rem; }
+  @media (min-width: 640px) { .container-page { padding-inline: 1.5rem; } }
+  @media (min-width: 768px) { .container-page { padding-inline: 2rem; } }
+  @media (min-width: 1024px) { .container-page { max-width: 72rem; } }
+
+  /* Secao empilhada */
+  .section { padding-block: 3rem; }
+  @media (min-width: 640px) { .section { padding-block: 4rem; } }
+  .section-alt { background: var(--color-soft); }
+
+  /* Titulo de secao em caixa alta */
+  .section-title {
+    text-align: center; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--color-ink); margin-bottom: 2rem;
+  }
+  .section-title::before {
+    counter-increment: sec; content: '0' counter(sec) ' /'; margin-right: .6em;
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; color: var(--color-tech); letter-spacing: .1em;
+  }
+  .section-title::after {
+    content: ''; display: block; width: 2.5rem; height: 2px; margin: 0.75rem auto 0;
+    background: linear-gradient(90deg, var(--color-tech), var(--color-ink));
+  }
+  @media (min-width: 768px) {
+    .section { padding-block: 6rem; }
+    .section-title { font-size: .875rem; margin-bottom: 3rem; }
+    .btn:focus-visible, .icon-btn:focus-visible { outline: 2px solid var(--color-tech); outline-offset: 3px; }
+  }
+  .section-lead { text-align: center; color: var(--color-muted); max-width: 36rem; margin: -1rem auto 2rem; line-height: 1.7; }
+
+  /* Cartao arredondado */
+  .card {
+    background: var(--color-paper); border: 1px solid var(--color-line);
+    border-radius: 1.25rem; padding: 1.5rem;
+    box-shadow: 0 1px 2px rgb(10 20 50 / .04), 0 8px 24px -12px rgb(30 60 140 / .12);
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s, opacity .8s;
+  }
+  .card:hover {
+    transform: translateY(-4px); border-color: rgb(59 111 245 / .45);
+    box-shadow: 0 0 0 4px rgb(59 111 245 / .06), 0 18px 36px -16px rgb(30 60 140 / .3);
+  }
+  .card-soft { background: var(--color-soft); border-radius: 1.25rem; padding: 1.5rem; }
+
+  /* Botao de icone redondo (redes sociais) */
+  .icon-btn {
+    display: inline-flex; height: 2.5rem; width: 2.5rem; align-items: center; justify-content: center;
+    border-radius: 9999px; border: 1px solid var(--color-line); color: var(--color-ink);
+    transition: background .2s, color .2s, border-color .2s, transform .25s, box-shadow .25s;
+  }
+  .icon-btn:hover { background: var(--color-ink); color: #fff; border-color: var(--color-tech); transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 18px -6px rgb(59 111 245 / .5); }
+
+  /* Botoes */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: 9999px;
+    padding: .9rem 2rem; font-size: .8125rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    transition: background .25s, color .25s, border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .btn-primary { background: var(--color-ink); color: #fff; }
+  .btn-primary:hover { background: var(--color-tech); transform: translateY(-2px); box-shadow: 0 10px 22px -8px rgb(59 111 245 / .6); }
+  .btn-outline { border: 1px solid var(--color-line); color: var(--color-ink); }
+  .btn-outline:hover { border-color: var(--color-tech); color: var(--color-tech); transform: translateY(-2px); }
+
+  /* Grade de fotos */
+  .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+  @media (min-width: 640px) { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+  .photo-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 1rem; transition: transform .5s; }
+  .photo-grid img:hover { transform: scale(1.04); }
 }
 
 @utility reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-  &.is-visible { opacity: 1; transform: none; }
+  translate: 0 24px;
+  transition: opacity 0.8s ease, translate 0.8s cubic-bezier(.2,.7,.2,1), transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s;
+  transition-delay: var(--d, 0ms);
+  &.is-visible { opacity: 1; translate: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; translate: none; transition: none; }
+}
+
+/* Tailwind v4 não define cursor de clique: restaura o ponteiro nos elementos clicáveis */
+@layer base {
+  button:not(:disabled), [role='button']:not(:disabled), summary, select, label[for], input[type='submit'], input[type='checkbox'], input[type='radio'], a[href] { cursor: pointer; }
+  button:disabled, [aria-disabled='true'] { cursor: not-allowed; }
 }

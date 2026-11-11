@@ -45,58 +45,58 @@ export default function Contact() {
     }
   }
 
+  const label = 'mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase'
+  const main = SOCIALS.filter((s) => ['WhatsApp', 'Instagram', 'LinkedIn'].includes(s.name))
+
   return (
-    <section id="contato" className="py-20 sm:py-28">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
-        <div className="reveal">
-          <p className="text-xs font-medium tracking-[0.3em] text-muted uppercase">Contato</p>
-          <h2 className="mt-4 text-3xl font-light tracking-tight text-ink sm:text-4xl">
-            Vamos potencializar o retorno do seu <span className="font-semibold">patrimônio</span>
-          </h2>
-          <p className="mt-5 max-w-lg text-muted">
-            Busca orientação especializada? Preencha o formulário e eu entro em contato. Se preferir, chame direto no
-            WhatsApp.
+    <section id="contato" className="py-14 sm:py-20">
+      <div className="mx-auto max-w-2xl px-5 sm:px-8 md:px-8 lg:grid lg:max-w-6xl lg:grid-cols-[.9fr_1.1fr] lg:grid-rows-[auto_auto_auto_1fr] lg:gap-x-16">
+        <div className="reveal text-center lg:text-left">
+          <h2 className="text-sm font-semibold tracking-[0.3em] text-ink uppercase">Contato</h2>
+          <p className="mt-3 text-sm text-muted md:text-base lg:max-w-md">
+            Busca orientação especializada? Chame direto ou preencha o formulário e eu entro em contato.
           </p>
-
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-sm font-medium text-white transition hover:bg-body"
-          >
-            <SOCIAL_ICONS.WhatsApp className="h-5 w-5" /> Chamar no WhatsApp
-          </a>
-
-          <ul className="mt-10 space-y-3">
-            {SOCIALS.filter((s) => s.name !== 'WhatsApp').map((s) => {
-              const Icon = SOCIAL_ICONS[s.name]
-              return (
-                <li key={s.name}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-4 rounded-xl border border-line px-4 py-3 transition hover:border-ink"
-                  >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-soft text-ink transition group-hover:bg-ink group-hover:text-white">
-                      <Icon className="h-4 w-4" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-medium text-ink">{s.name}</span>
-                      <span className="block truncate text-xs text-muted">{s.handle}</span>
-                    </span>
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
         </div>
 
-        <div className="reveal rounded-2xl border border-line bg-soft p-6 sm:p-9">
+        <ul className="reveal mt-8 grid grid-cols-3 gap-3 lg:grid-cols-1 lg:gap-4">
+          {main.map((s) => {
+            const Icon = SOCIAL_ICONS[s.name as keyof typeof SOCIAL_ICONS]
+            return (
+              <li key={s.name}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${s.name}: ${s.handle}`}
+                  className="group flex flex-col items-center gap-3 rounded-3xl border border-line bg-paper px-2 py-6 transition hover:border-ink lg:flex-row lg:gap-5 lg:px-5 lg:py-4 lg:hover:translate-x-1 lg:hover:border-tech/50 lg:hover:shadow-[0_14px_30px_-16px_rgb(30_60_140/.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                >
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-soft text-ink transition group-hover:bg-ink group-hover:text-white">
+                    <Icon className="h-6 w-6" aria-hidden="true" />
+                  </span>
+                  <span className="flex flex-col items-center lg:items-start">
+                    <span className="text-xs font-medium text-ink lg:text-sm">{s.name}</span>
+                    <span className="hidden text-xs text-muted lg:block">{s.handle}</span>
+                  </span>
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="reveal mt-4 flex w-full lg:mt-6 lg:self-start items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-sm font-medium text-white transition hover:bg-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        >
+          <SOCIAL_ICONS.WhatsApp className="h-5 w-5" aria-hidden="true" /> Chamar no WhatsApp
+        </a>
+
+        <div className="reveal mt-8 rounded-3xl border border-line bg-soft p-6 sm:p-8 md:p-10 lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:mt-0 lg:bg-paper lg:shadow-[0_24px_60px_-30px_rgb(30_60_140/.35)]">
           {status === 'success' ? (
-            <div className="flex h-full min-h-96 flex-col items-center justify-center text-center" role="status">
+            <div className="flex min-h-72 flex-col items-center justify-center text-center" role="status">
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-white">
-                <Check className="h-8 w-8" />
+                <Check className="h-8 w-8" aria-hidden="true" />
               </span>
               <h3 className="mt-6 text-xl font-semibold text-ink">Mensagem enviada!</h3>
               <p className="mt-2 max-w-xs text-sm text-muted">Obrigado pelo contato. Retornarei o mais breve possível.</p>
@@ -105,39 +105,38 @@ export default function Contact() {
               </button>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="space-y-5" noValidate={false}>
-              <h3 className="text-xl font-semibold text-ink">Envie sua mensagem</h3>
+            <form onSubmit={onSubmit} className="relative space-y-4">
+              <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-ink uppercase">Envie sua mensagem</h3>
 
               <div>
-                <label htmlFor="nome" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Nome</label>
+                <label htmlFor="nome" className={label}>Nome</label>
                 <input id="nome" name="nome" required minLength={2} autoComplete="name" placeholder="Seu nome completo" className={field} />
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="telefone" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">WhatsApp</label>
-                  <input
-                    id="telefone"
-                    name="telefone"
-                    type="tel"
-                    inputMode="tel"
-                    required
-                    minLength={14}
-                    autoComplete="tel"
-                    placeholder="(41) 99999-9999"
-                    value={phone}
-                    onChange={(e) => setPhone(maskPhone(e.target.value))}
-                    className={field}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">E-mail</label>
-                  <input id="email" name="email" type="email" required autoComplete="email" placeholder="voce@email.com" className={field} />
-                </div>
+              <div>
+                <label htmlFor="email" className={label}>E-mail</label>
+                <input id="email" name="email" type="email" required autoComplete="email" placeholder="voce@email.com" className={field} />
               </div>
 
               <div>
-                <label htmlFor="interesse" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Tenho interesse em</label>
+                <label htmlFor="telefone" className={label}>WhatsApp</label>
+                <input
+                  id="telefone"
+                  name="telefone"
+                  type="tel"
+                  inputMode="tel"
+                  required
+                  minLength={14}
+                  autoComplete="tel"
+                  placeholder="(41) 99999-9999"
+                  value={phone}
+                  onChange={(e) => setPhone(maskPhone(e.target.value))}
+                  className={field}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="interesse" className={label}>Tenho interesse em</label>
                 <select id="interesse" name="interesse" required defaultValue="" className={field}>
                   <option value="" disabled>Selecione uma opção</option>
                   {INTERESTS.map((i) => (
@@ -147,15 +146,15 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="mensagem" className="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Mensagem</label>
-                <textarea id="mensagem" name="mensagem" rows={4} required minLength={10} placeholder="Conte um pouco sobre o que você procura..." className={`${field} resize-y`} />
+                <label htmlFor="mensagem" className={label}>Mensagem (opcional)</label>
+                <textarea id="mensagem" name="mensagem" rows={3} placeholder="Conte um pouco sobre o que você procura..." className={`${field} resize-y`} />
               </div>
 
               {/* honeypot anti-spam: invisível para humanos */}
               <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
 
               {status === 'error' && (
-                <p role="alert" className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <p role="alert" className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
                   {error} Você pode falar direto pelo WhatsApp.
                 </p>
               )}
@@ -163,9 +162,9 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-medium text-white transition hover:bg-body disabled:cursor-not-allowed disabled:opacity-60"
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-medium text-white transition hover:bg-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {status === 'sending' ? 'Enviando...' : (<>Enviar mensagem <Arrow className="h-5 w-5 transition group-hover:translate-x-1" /></>)}
+                {status === 'sending' ? 'Enviando...' : (<>Enviar <Arrow className="h-5 w-5 transition group-hover:translate-x-1" aria-hidden="true" /></>)}
               </button>
               <p className="text-center text-xs text-muted">Seus dados são usados apenas para retornar o seu contato.</p>
             </form>
