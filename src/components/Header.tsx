@@ -25,10 +25,10 @@ export default function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled || open ? 'border-b border-line bg-paper/90 backdrop-blur md:shadow-[0_8px_24px_-16px_rgb(30_60_140/.25)]' : 'bg-transparent'
+        scrolled || open ? 'border-b border-line bg-paper/90 backdrop-blur md:shadow-[0_8px_24px_-16px_rgb(30_60_140/.25)]' : 'bg-transparent md:border-b md:border-line md:bg-paper/90 md:backdrop-blur'
       }`}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem] md:max-w-6xl">
         <a
           href="#inicio"
           className="text-sm font-semibold tracking-[0.25em] text-ink uppercase"

@@ -4,13 +4,13 @@ import { SOCIAL_ICONS } from './Icons'
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-soft py-12">
-      <div className="container-page flex flex-col items-center gap-6 text-center md:grid md:grid-cols-3 md:items-center md:text-left">
+      <div className="container-page flex flex-col items-center gap-6 text-center">
         <div>
           <p className="text-sm font-semibold tracking-[0.25em] text-ink uppercase">Kaique Morais</p>
           <p className="mt-2 text-xs tracking-wide text-muted">Leilões &amp; Airbnb Expert</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 md:justify-self-center">
+        <div className="flex flex-wrap justify-center gap-2">
           {SOCIALS.map((s) => {
             const Icon = SOCIAL_ICONS[s.name]
             return (
@@ -28,7 +28,7 @@ export default function Footer() {
           })}
         </div>
 
-        <div className="flex flex-col gap-6 md:gap-2 md:justify-self-end md:text-right">
+        <div className="flex flex-col gap-6 md:gap-2">
         <p className="text-xs text-muted">© {new Date().getFullYear()} Kaique Morais. Todos os direitos reservados.</p>
         <p className="text-xs text-muted">
           Desenvolvido por{' '}

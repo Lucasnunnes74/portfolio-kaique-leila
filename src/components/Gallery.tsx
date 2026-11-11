@@ -38,9 +38,9 @@ export default function Gallery() {
     <section id="galeria" className="section">
       <div className="container-page">
         <h2 className="section-title">Galeria</h2>
-        <ul className="mt-8 grid grid-cols-3 gap-2 sm:gap-3 md:mt-0 md:h-[30rem] md:grid-cols-4 md:grid-rows-2 md:gap-4 lg:h-[38rem]">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:mt-0">
           {GALLERY.map((g, i) => (
-            <li key={i} className={i === 0 ? 'md:col-span-2 md:row-span-2' : n === 3 ? 'md:col-span-2' : i === n - 1 && n % 3 === 1 ? 'col-span-2 md:col-span-2' : ''}>
+            <li key={i} className={i === 0 || (i === n - 1 && n % 2 === 0) ? 'col-span-2' : ''}>
               <button
                 type="button"
                 onClick={(e) => {
@@ -48,13 +48,13 @@ export default function Gallery() {
                   setOpen(i)
                 }}
                 aria-label={`Ampliar foto ${i + 1} de ${n}`}
-                className="group block aspect-square w-full overflow-hidden rounded-lg bg-line md:aspect-auto md:h-full md:rounded-2xl md:shadow-[0_12px_30px_-18px_rgb(30_60_140/.4)] md:transition-shadow md:hover:shadow-[0_22px_44px_-18px_rgb(30_60_140/.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+                className={`${i === 0 ? 'aspect-[4/3]' : 'aspect-square'} group block w-full overflow-hidden rounded-3xl bg-line md:shadow-[0_12px_30px_-18px_rgb(30_60_140/.4)] md:transition-shadow md:hover:shadow-[0_22px_44px_-18px_rgb(30_60_140/.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2`}
               >
                 <img
                   src={g.src}
                   alt={g.alt}
                   loading="lazy"
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  className={`h-full w-full transition duration-500 group-hover:scale-105 ${g.src.includes("airbnb") ? "bg-black object-contain p-3" : g.src.includes("sistema") ? "bg-white object-contain p-2" : "object-cover"}`}
                 />
               </button>
             </li>

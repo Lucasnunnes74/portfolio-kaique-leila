@@ -5,8 +5,8 @@ export default function Videos() {
     <section id="videos" className="section">
       <div className="container-page">
         <h2 className="section-title">Vídeos</h2>
-        <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2 md:gap-10 lg:max-w-5xl lg:gap-14">
-          {VIDEOS.map((v, i) => {
+        <div className="grid gap-6 sm:grid-cols-2">
+          {VIDEOS.map((v) => {
             const cover = POSTS.find((p) => p.href.includes(v.reelId))?.image
             return (
               <a
@@ -15,9 +15,9 @@ export default function Videos() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Assistir no Instagram: ${v.title}`}
-                className="card group block overflow-hidden !p-0"
+                className="card group block overflow-hidden !rounded-3xl !p-0"
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-ink lg:aspect-square">
+                <div className="relative aspect-[4/5] overflow-hidden bg-ink">
                   {cover && (
                     <img
                       src={cover}
@@ -33,15 +33,9 @@ export default function Videos() {
                     </svg>
                   </span>
                 </div>
-                <div className="flex items-start justify-between gap-4 px-5 py-4">
+                <div className="px-5 py-4">
                   <p className="text-sm leading-relaxed text-body">{v.title}</p>
-                  <span className="hidden shrink-0 text-xs tracking-widest text-muted md:block">
-                    {i + 1}/{VIDEOS.length}
-                  </span>
                 </div>
-                <span className="hidden px-5 pb-5 text-xs font-semibold tracking-widest text-ink uppercase underline underline-offset-4 md:inline-block">
-                  Ver mais
-                </span>
               </a>
             )
           })}

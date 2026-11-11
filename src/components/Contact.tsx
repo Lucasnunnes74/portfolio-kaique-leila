@@ -50,15 +50,15 @@ export default function Contact() {
 
   return (
     <section id="contato" className="py-14 sm:py-20">
-      <div className="mx-auto max-w-2xl px-5 sm:px-8 md:px-8 lg:grid lg:max-w-6xl lg:grid-cols-[.9fr_1.1fr] lg:grid-rows-[auto_auto_auto_1fr] lg:gap-x-16">
-        <div className="reveal text-center lg:text-left">
-          <h2 className="text-sm font-semibold tracking-[0.3em] text-ink uppercase">Contato</h2>
-          <p className="mt-3 text-sm text-muted md:text-base lg:max-w-md">
+      <div className="mx-auto max-w-2xl px-5 sm:px-8 md:max-w-none">
+        <div className="reveal text-center">
+          <h2 className="section-title !mb-3">Contato</h2>
+          <p className="mt-3 text-sm text-muted">
             Busca orientação especializada? Chame direto ou preencha o formulário e eu entro em contato.
           </p>
         </div>
 
-        <ul className="reveal mt-8 grid grid-cols-3 gap-3 lg:grid-cols-1 lg:gap-4">
+        <ul className="reveal mt-8 grid grid-cols-3 gap-3">
           {main.map((s) => {
             const Icon = SOCIAL_ICONS[s.name as keyof typeof SOCIAL_ICONS]
             return (
@@ -68,14 +68,13 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${s.name}: ${s.handle}`}
-                  className="group flex flex-col items-center gap-3 rounded-3xl border border-line bg-paper px-2 py-6 transition hover:border-ink lg:flex-row lg:gap-5 lg:px-5 lg:py-4 lg:hover:translate-x-1 lg:hover:border-tech/50 lg:hover:shadow-[0_14px_30px_-16px_rgb(30_60_140/.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  className="group flex flex-col items-center gap-3 rounded-3xl border border-line bg-paper px-2 py-6 transition hover:border-ink md:hover:-translate-y-1 md:hover:border-tech/50 md:hover:shadow-[0_14px_30px_-16px_rgb(30_60_140/.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-soft text-ink transition group-hover:bg-ink group-hover:text-white">
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </span>
-                  <span className="flex flex-col items-center lg:items-start">
-                    <span className="text-xs font-medium text-ink lg:text-sm">{s.name}</span>
-                    <span className="hidden text-xs text-muted lg:block">{s.handle}</span>
+                  <span className="flex flex-col items-center">
+                    <span className="text-xs font-medium text-ink">{s.name}</span>
                   </span>
                 </a>
               </li>
@@ -87,12 +86,12 @@ export default function Contact() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="reveal mt-4 flex w-full lg:mt-6 lg:self-start items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-sm font-medium text-white transition hover:bg-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          className="reveal mt-4 flex w-full items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-sm font-medium text-white transition hover:bg-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
         >
           <SOCIAL_ICONS.WhatsApp className="h-5 w-5" aria-hidden="true" /> Chamar no WhatsApp
         </a>
 
-        <div className="reveal mt-8 rounded-3xl border border-line bg-soft p-6 sm:p-8 md:p-10 lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:mt-0 lg:bg-paper lg:shadow-[0_24px_60px_-30px_rgb(30_60_140/.35)]">
+        <div className="reveal mt-8 rounded-3xl border border-line bg-soft p-6 sm:p-8 md:shadow-[0_24px_60px_-30px_rgb(30_60_140/.3)]">
           {status === 'success' ? (
             <div className="flex min-h-72 flex-col items-center justify-center text-center" role="status">
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-white">

@@ -4,6 +4,7 @@ import FloatingWhatsApp from './components/FloatingWhatsApp'
 import Footer from './components/Footer'
 import Gallery from './components/Gallery'
 import Header from './components/Header'
+import Intro from './components/Intro'
 import Hero from './components/Hero'
 import Posts from './components/Posts'
 import Process from './components/Process'
@@ -15,6 +16,8 @@ export default function App() {
   useReveal()
   return (
     <>
+      <Intro />
+      <div id="scroll-progress" aria-hidden="true" />
       <Header />
       <main>
         <Hero />
